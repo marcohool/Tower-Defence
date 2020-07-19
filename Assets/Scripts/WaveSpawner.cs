@@ -12,6 +12,7 @@ public class WaveSpawner : MonoBehaviour
     public Transform spawnPoint;
     public Text waveCountText;
     public static List<GameObject> activeEnemies = new List<GameObject>();
+    public GameObject spawnEffect;
     
     private int waveNumber;
     private float countdown = 2f;
@@ -39,6 +40,8 @@ public class WaveSpawner : MonoBehaviour
     
     private void SpawnEnemy ()
     {
+        GameObject effect = (GameObject) Instantiate(spawnEffect, spawnPoint.position, spawnPoint.rotation);
+        Destroy(effect, 2f);
         activeEnemies.Add(Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation).gameObject);
     }
     

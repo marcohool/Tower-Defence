@@ -106,3 +106,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2c3857f9fee8848b591da8ac65ff1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnEffect: {fileID: 5993599162938317683, guid: 93933ab4e23aa45468382f18c1a04683,
+    type: 3}

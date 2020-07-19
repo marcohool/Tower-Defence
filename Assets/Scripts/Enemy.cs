@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+
+    public GameObject despawnEffect;
+    
     private float speed = 40f;
     private Transform target;
     private int currentPosition = 0;
@@ -29,6 +32,8 @@ public class Enemy : MonoBehaviour
         {
             
             WaveSpawner.activeEnemies.Remove(gameObject);
+            GameObject effect = (GameObject) Instantiate(despawnEffect, transform.position, transform.rotation);
+            Destroy(effect, 0.5f);
             Destroy(gameObject);
             
             return;
