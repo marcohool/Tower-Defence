@@ -1108,7 +1108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98499514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.1, y: 2.44, z: 54.12}
+  m_LocalPosition: {x: 36.1, y: 2.44, z: 52.09}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7623,7 +7623,7 @@ PrefabInstance:
     - target: {fileID: 6549717317493733420, guid: cda15f4b6f793cf40999b722f869d9d0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.68
+      value: -29.63
       objectReference: {fileID: 0}
     - target: {fileID: 6549717317493733420, guid: cda15f4b6f793cf40999b722f869d9d0,
         type: 3}
@@ -8229,7 +8229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b829eb5974d960e43840872fc917786f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panSpeed: 30
+  panSpeed: 100
 --- !u!1001 &965935182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17286,6 +17286,8 @@ MonoBehaviour:
     type: 3}
   spawnPoint: {fileID: 98499518}
   waveCountText: {fileID: 1095571694}
+  spawnEffect: {fileID: 5993599162938317683, guid: 93933ab4e23aa45468382f18c1a04683,
+    type: 3}
 --- !u!4 &2063784990
 Transform:
   m_ObjectHideFlags: 0

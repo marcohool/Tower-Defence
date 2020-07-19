@@ -6,23 +6,23 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    private Transform target;
+    private Transform _target;
     public float speed = 70f;
     public GameObject impactEffect;
 
     public void SetTarget(Transform _target)
     {
-        target = _target;
+        this._target = _target;
     }
     void Update()
     {
-        if (target == null)
+        if (_target == null)
         {
             Destroy(gameObject);
             return;
         }
 
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = _target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
         if (dir.magnitude <= distanceThisFrame) // If target has hit
@@ -37,8 +37,8 @@ public class Bullet : MonoBehaviour
     {
         GameObject effect = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effect, 2f);
-        WaveSpawner.activeEnemies.Remove(target.gameObject);
-        Destroy(target.gameObject);
+        WaveSpawner.ActiveEnemies.Remove(_target.gameObject);
+        Destroy(_target.gameObject);
         Destroy(gameObject);
         
     }

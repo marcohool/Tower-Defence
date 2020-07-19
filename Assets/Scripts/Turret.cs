@@ -6,13 +6,13 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     
-    private Transform target;
+    private Transform _target;
     
     [Header("Attributes")]
     
     public float range = 15f;
     private float fireRate = 0.3f;
-    private float fireCountdown = 0f;
+    private float _fireCountdown = 0f;
     
     [Header("Setup Fields")]
     
@@ -31,7 +31,7 @@ public class Turret : MonoBehaviour
 
         GameObject enemyToTarget = null;
         
-        foreach (var enemy in WaveSpawner.activeEnemies)
+        foreach (var enemy in WaveSpawner.ActiveEnemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < range)
@@ -43,11 +43,11 @@ public class Turret : MonoBehaviour
 
         if (enemyToTarget != null)
         {
-            target = enemyToTarget.transform;
+            _target = enemyToTarget.transform;
         }
         else
         {
-            target = null;
+            _target = null;
         }
         
     }
@@ -55,23 +55,23 @@ public class Turret : MonoBehaviour
     void Update()
     {
 
-        if (target == null)
+        if (_target == null)
         {
             return;
         }
 
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = _target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = lookRotation.eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
-        if (fireCountdown <= 0)
+        if (_fireCountdown <= 0)
         {
             Shoot();
-            fireCountdown = 1f * fireRate;
+            _fireCountdown = 1f * fireRate;
         }
 
-        fireCountdown -= Time.deltaTime;
+        _fireCountdown -= Time.deltaTime;
 
     }
 
@@ -79,7 +79,7 @@ public class Turret : MonoBehaviour
     {
         GameObject bulletObject = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Bullet bullet = bulletObject.GetComponent<Bullet>();
-        bullet.SetTarget(target);
+        bullet.SetTarget(_target);
     }
 
     private void OnDrawGizmosSelected()

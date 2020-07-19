@@ -9,41 +9,41 @@ public class Node : MonoBehaviour
     public Color hoverColorPlaceable;
     public Color hoverColorUnplaceable;
     private readonly Vector3 positionOffset = new Vector3(0f,0.5f,0f);
-    private GameObject turret;
-    private Renderer rend;
-    private Color startColor;
+    private GameObject _turret;
+    private Renderer _rend;
+    private Color _startColor;
 
     void Start()
     {
-        rend = GetComponent<Renderer>();
-        startColor = rend.material.color;
+        _rend = GetComponent<Renderer>();
+        _startColor = _rend.material.color;
     }
 
     private void OnMouseDown()
     {
-        if (turret != null)
+        if (_turret != null)
         {
             Debug.Log("ALREADY TURRET THERE LOOOOOL !");
             return;
         }
 
         GameObject turretToBuild = BuildManager.instance.getTurretToBuild();
-        turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
-        rend.material.color = hoverColorUnplaceable;
+        _turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
+        _rend.material.color = hoverColorUnplaceable;
     }
 
     private void OnMouseEnter()
     {
-        if (turret != null)
+        if (_turret != null)
         {
-            rend.material.color = hoverColorUnplaceable;
+            _rend.material.color = hoverColorUnplaceable;
             return;
         }
-        rend.material.color = hoverColorPlaceable;
+        _rend.material.color = hoverColorPlaceable;
     }
 
     private void OnMouseExit()
     {
-        rend.material.color = startColor;
+        _rend.material.color = _startColor;
     }
 }

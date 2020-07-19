@@ -7,19 +7,19 @@ public class Enemy : MonoBehaviour
     public GameObject despawnEffect;
     
     private float speed = 40f;
-    private Transform target;
-    private int currentPosition = 0;
+    private Transform _target;
+    private int _currentPosition = 0;
     private void Start()
      {
-         target = Waypoints.points[0];
+         _target = Waypoints.Points[0];
      }
 
     private void Update()
     {
-        var dir = target.position - transform.position;
+        var dir = _target.position - transform.position;
         transform.Translate(dir.normalized * (speed * Time.deltaTime), Space.World);
 
-        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
+        if (Vector3.Distance(transform.position, _target.position) <= 0.2f)
         {
             GetNextWaypoint();
         }
@@ -28,10 +28,10 @@ public class Enemy : MonoBehaviour
 
     private void GetNextWaypoint()
     {
-        if (currentPosition == Waypoints.points.Length - 1)
+        if (_currentPosition == Waypoints.Points.Length - 1)
         {
             
-            WaveSpawner.activeEnemies.Remove(gameObject);
+            WaveSpawner.ActiveEnemies.Remove(gameObject);
             GameObject effect = (GameObject) Instantiate(despawnEffect, transform.position, transform.rotation);
             Destroy(effect, 0.5f);
             Destroy(gameObject);
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        currentPosition++;
-        target = Waypoints.points[currentPosition];
+        _currentPosition++;
+        _target = Waypoints.Points[_currentPosition];
     }
 }
