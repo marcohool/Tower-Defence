@@ -55,7 +55,7 @@ public class CameraController : MonoBehaviour
         
         
         _currentZoom -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * 1000 * scrollSpeed;
-        _currentZoom = Mathf.Clamp( _currentZoom, -50f, 80f );
+        _currentZoom = Mathf.Clamp( _currentZoom, -70f, 10f );
         transform.position = new Vector3( transform.position.x, transform.position.y - (transform.position.y - (_initialPosition.y + _currentZoom)) * 0.1f, transform.position.z );
         float x = transform.eulerAngles.x - (transform.eulerAngles.x - (_initialRotation.x + _currentZoom * ZoomRotation)) * 0.1f;
         x = Mathf.Clamp( x, zoomAngleRange.x, zoomAngleRange.y );
