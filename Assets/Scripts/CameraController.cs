@@ -5,10 +5,21 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    private float panSpeed = 30f;
+    private float panSpeed = 100f;
     private bool _esc = true;
-    private float scrollSpeed = 20f;
+    private float scrollSpeed = 40f;
     private string _inputKey;
+    private float _currentZoom = 0;
+    private float ZoomRotation = 1;
+    private readonly Vector2 zoomAngleRange = new Vector2( 20, 70 );
+    private Vector3 _initialPosition;
+    private Vector3 _initialRotation;
+
+    private void Start()
+    {
+        _initialPosition = transform.position;
+        _initialRotation = transform.eulerAngles;
+    }
 
     void Update()
     {
@@ -42,14 +53,13 @@ public class CameraController : MonoBehaviour
             transform.Translate(Vector3.right * panSpeed * Time.deltaTime, Space.World);
         }
         
-        Vector3 pos = transform.position;
-        pos.y -= Input.GetAxis("Mouse ScrollWheel") * 1000 * scrollSpeed * Time.deltaTime;
-        pos.y = Mathf.Clamp(pos.y, 10f, 100f);
-        transform.position = pos;
-    }
-
-    private void moveCamera()
-    {
         
+        _currentZoom -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * 1000 * scrollSpeed;
+        _currentZoom = Mathf.Clamp( _currentZoom, -50f, 80f );
+        transform.position = new Vector3( transform.position.x, transform.position.y - (transform.position.y - (_initialPosition.y + _currentZoom)) * 0.1f, transform.position.z );
+        float x = transform.eulerAngles.x - (transform.eulerAngles.x - (_initialRotation.x + _currentZoom * ZoomRotation)) * 0.1f;
+        x = Mathf.Clamp( x, zoomAngleRange.x, zoomAngleRange.y );
+        transform.eulerAngles = new Vector3( x, transform.eulerAngles.y, transform.eulerAngles.z );
     }
+    
 }
